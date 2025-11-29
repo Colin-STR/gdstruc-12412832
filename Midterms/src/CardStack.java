@@ -1,55 +1,46 @@
+import java.util.LinkedList;
+
 public class CardStack
 {
-    private cardNode top;
-    private int size;
+    private LinkedList<Card> stack;
 
-    private static class cardNode
+    public CardStack()
     {
-        Card card;
-        cardNode next;
-
-        cardNode(Card card)
-        {
-            this.card = card;
-        }
+        stack = new LinkedList<>();
     }
 
     public void push(Card card)
     {
-        cardNode node = new cardNode(card);
-        node.next = top;
-        top = node;
-        size++;
+        stack.push(card);
     }
 
     public Card pop()
     {
-        if (top == null) return null;
+        if (!stack.isEmpty())
+        {
+            return stack.pop();
+        }
+        return null;
+    }
 
-        Card removed = top.card;
-        top = top.next;
-        size--;
-        return removed;
+    public Card peek()
+    {
+        return stack.peek();
     }
 
     public boolean isEmpty()
     {
-        return top == null;
+        return stack.isEmpty();
     }
 
-    public int getSize()
+    public int size()
     {
-        return size;
+        return stack.size();
     }
 
-    public void printStack()
+    @Override
+    public String toString()
     {
-        cardNode current = top;
-        while (current != null)
-        {
-            System.out.print(current.card + " | ");
-            current = current.next;
-        }
-        System.out.println();
+        return stack.toString();
     }
 }
